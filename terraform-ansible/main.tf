@@ -4,6 +4,24 @@ provider "google" {
   credentials = file("~/sec.json")
 }
 
+#tf-state-prod-bykumar need to create manully
+terraform {
+  required_version = ">= 0.13"
+
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+    }
+  }
+
+  backend "gcs" {
+    bucket      = "tf-state-prod-bykumar"
+    prefix      = "ansibleterraform"
+    credentials = "~/sec.json"
+   }
+}
+
+
 resource "google_compute_network" "vpc" {
   name                    = "centos9-vpc"
   auto_create_subnetworks = true
