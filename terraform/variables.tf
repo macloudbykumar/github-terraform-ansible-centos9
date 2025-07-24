@@ -1,5 +1,5 @@
 variable "project_id" {
-   default = ""
+   default = "galvanic-flame-466111-q8"
 }
 
 variable "region" {
