@@ -20,6 +20,7 @@ jobs:
         run: |
           chmod 600 ~/.ssh/id_rsa
           chmod 644 ~/.ssh/id_rsa.pub
+          export ANSIBLE_HOST_KEY_CHECKING=False
 
       - name: Install Terraform and Ansible on CentOS 9
         run: |
