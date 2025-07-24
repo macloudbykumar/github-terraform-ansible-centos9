@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master  # Or whichever branch you want
+      - main  # Or whichever branch you want
 
 jobs:
   hello:
