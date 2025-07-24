@@ -73,9 +73,6 @@ resource "google_compute_instance" "centos9_vm" {
       chown -R devops:devops /home/devops/.ssh
       chmod 700 /home/devops/.ssh
       chmod 600 /home/devops/.ssh/authorized_keys
-      usermod -aG wheel devops
-      echo "devops ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/devops
-      chmod 440 /etc/sudoers.d/devops
     EOT
   }
 
