@@ -48,7 +48,7 @@ resource "google_compute_firewall" "allow_ssh" {
 
 resource "google_compute_instance" "centos9_vm" {
   depends_on = [google_compute_firewall.allow_ssh]
-  name         = "centos9-vm1"
+  name         = "centos9-vm2"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
 
