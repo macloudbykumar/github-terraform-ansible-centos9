@@ -1,16 +1,10 @@
-provider "google" {
-  project     = "galvanic-flame-466111-q8"
-  region      = "us-central1"
-  credentials = file("~/sec.json")
-}
-
-#tf-state-prod-bykumar need to create manully
 terraform {
-  required_version = ">= 0.13"
-
+  required_version = ">= 1.3"
+  
   required_providers {
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
+      version = ">= 4.0"
     }
   }
 
@@ -18,9 +12,14 @@ terraform {
     bucket      = "tf-state-prod-bykumar"
     prefix      = "ansibleterraform"
     credentials = "~/sec.json"
-   }
+  }
 }
 
+provider "google" {
+  project     = "galvanic-flame-466111-q8"
+  region      = "us-central1"
+  credentials = file("~/sec.json")
+}
 
 resource "google_compute_network" "vpc" {
   name                    = "centos9-vpc1"
@@ -36,21 +35,23 @@ resource "google_compute_firewall" "allow_ssh" {
     ports    = ["22", "80", "8080", "1000-2000"]
   }
 
-  direction = "INGRESS"
+  direction     = "INGRESS"
   source_ranges = ["0.0.0.0/0"]
-
-  target_tags = ["centos9"]
-  priority    = 1000
-  description = "Allow SSH from anywhere"
+  target_tags   = ["centos9"]
+  priority      = 1000
+  description   = "Allow SSH (and web) ingress"
 }
 
-
+resource "google_compute_address" "static_ip" {
+  name   = "centos9-vm2-ip"
+  region = "us-central1"
+}
 
 resource "google_compute_instance" "centos9_vm" {
-  depends_on = [google_compute_firewall.allow_ssh]
-  name         = "centos9-vm2"
+  depends_on  = [google_compute_firewall.allow_ssh]
+  name        = "centos9-vm2"
   machine_type = "e2-medium"
-  zone         = "us-central1-a"
+  zone        = "us-central1-a"
 
   boot_disk {
     initialize_params {
@@ -59,8 +60,11 @@ resource "google_compute_instance" "centos9_vm" {
   }
 
   network_interface {
-    network       = google_compute_network.vpc.name
-    access_config {}
+    network = google_compute_network.vpc.name
+    access_config {
+      nat_ip = google_compute_address.static_ip.address
+      # optional: network_tier = "STANDARD"
+    }
   }
 
   metadata = {
@@ -79,7 +83,7 @@ resource "google_compute_instance" "centos9_vm" {
   tags = ["centos9"]
 }
 
-
 output "instance_ip" {
-  value = google_compute_instance.centos9_vm.network_interface[0].access_config[0].nat_ip
+  description = "Static external IP of the VM"
+  value       = google_compute_instance.centos9_vm.network_interface[0].access_config[0].nat_ip
 }
