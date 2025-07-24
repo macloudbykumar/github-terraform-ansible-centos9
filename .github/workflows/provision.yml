@@ -38,14 +38,20 @@ jobs:
           ansible --version
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd terraform-ansible
+          terraform init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: |
+          cd terraform-ansible
+          terraform apply -auto-approve
 
       - name: Get Terraform output (IP)
         id: get_ip
-        run: terraform output -raw instance_ip > ip.txt
+        run: |
+          cd terraform-ansible
+          terraform output -raw instance_ip > ip.txt
 
       - name: Prepare Ansible inventory
         run: |
