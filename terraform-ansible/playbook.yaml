@@ -3,12 +3,6 @@
   hosts: centos9
   become: true
   tasks:
-    - name: Wait for port 22 to be open
-      wait_for:
-        port: 22
-        timeout: 300
-        state: started
-        
     - name: Install required packages
       dnf:
         name:
