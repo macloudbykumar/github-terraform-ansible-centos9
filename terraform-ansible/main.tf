@@ -1,6 +1,6 @@
 provider "google" {
   project     = "galvanic-flame-466111-q8"
-  region      = ""
+  region      = "us-central1"
   credentials = file("~/sec.json")
 }
 
