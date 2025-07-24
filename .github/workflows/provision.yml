@@ -56,7 +56,10 @@ jobs:
         id: get_ip
         run: |
           cd terraform-ansible
+          #this is from main.tf
           terraform output -raw instance_ip > ip.txt
+          #this is for withstatic.tf
+          terraform output -raw instance_ip_s >> ip.txt
 
       - name: Prepare Ansible inventory
         run: |
