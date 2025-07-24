@@ -27,30 +27,6 @@ resource "google_compute_network" "vpc" {
   auto_create_subnetworks = true
 }
 
-/*
-resource "google_compute_instance" "centos9_vm" {
-  name         = "centos9-vm1"
-  machine_type = "e2-medium"
-  zone = "us-central1-a"
-  boot_disk {
-    initialize_params {
-      image = "centos-cloud/centos-stream-9"
-    }
-  }
-
-  network_interface {
-    network       = google_compute_network.vpc.name
-    access_config {}
-  }
-
-  metadata = {
-    ssh-keys = "centos:${file("~/.ssh/id_rsa.pub")}"
-  }
-
-  tags = ["centos9"]
-}
-
-*/
 
 resource "google_compute_instance" "centos9_vm" {
   name         = "centos9-vm1"
@@ -82,6 +58,23 @@ resource "google_compute_instance" "centos9_vm" {
   }
 
   tags = ["centos9"]
+}
+
+resource "google_compute_firewall" "allow_ssh" {
+  name    = "allow-ssh"
+  network = google_compute_network.vpc.name
+
+  allows {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  direction = "INGRESS"
+  source_ranges = ["0.0.0.0/0"]
+
+  target_tags = ["centos9"]
+  priority    = 1000
+  description = "Allow SSH from anywhere"
 }
 
 output "instance_ip" {
