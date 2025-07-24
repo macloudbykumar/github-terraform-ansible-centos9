@@ -27,6 +27,7 @@ resource "google_compute_network" "vpc" {
   auto_create_subnetworks = true
 }
 
+/*
 resource "google_compute_instance" "centos9_vm" {
   name         = "centos9-vm"
   machine_type = "e2-medium"
@@ -51,4 +52,37 @@ resource "google_compute_instance" "centos9_vm" {
 
 output "instance_ip" {
   value = google_compute_instance.centos9_vm.network_interface[0].access_config[0].nat_ip
+}
+*/
+
+resource "google_compute_instance" "centos9_vm" {
+  name         = "centos9-vm"
+  machine_type = "e2-medium"
+  zone         = "us-central1-a"
+
+  boot_disk {
+    initialize_params {
+      image = "centos-cloud/centos-stream-9"
+    }
+  }
+
+  network_interface {
+    network       = google_compute_network.vpc.name
+    access_config {}
+  }
+
+  metadata = {
+    ssh-keys = "centos:${file("~/.ssh/id_rsa.pub")}"
+    startup-script = <<-EOT
+      #!/bin/bash
+      useradd -m -s /bin/bash devops
+      mkdir -p /home/devops/.ssh
+      echo "ssh-rsa AAAAB3Nza... your-new-user-public-key ..." > /home/devops/.ssh/authorized_keys
+      chown -R devops:devops /home/devops/.ssh
+      chmod 700 /home/devops/.ssh
+      chmod 600 /home/devops/.ssh/authorized_keys
+    EOT
+  }
+
+  tags = ["centos9"]
 }
