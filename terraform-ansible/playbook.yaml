@@ -17,15 +17,16 @@
           - vim
         state: present
 
-    - name: Create a user for automation
-      user:
-        name: devops
-        shell: /bin/bash
-        create_home: yes
-
-    - name: Add sudo privileges for devops user
-      lineinfile:
-        path: /etc/sudoers.d/devops
-        line: 'devops ALL=(ALL) NOPASSWD: ALL'
-        create: yes
-        mode: '0440'
+#    - name: Create a user for automation
+#      user:
+#        name: devops
+#        shell: /bin/bash
+#        create_home: yes
+#
+#    - name: Add sudo privileges for devops user
+#      lineinfile:
+#        path: /etc/sudoers.d/devops
+#        line: 'devops ALL=(ALL) NOPASSWD: ALL'
+#        create: yes
+#        mode: '0440'
+#
