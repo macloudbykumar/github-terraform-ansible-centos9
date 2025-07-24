@@ -88,7 +88,7 @@ resource "google_compute_instance" "centos9_vm3" {
   tags = ["centos9"]
 }
 
-output "instance_ip" {
+output "instance_ip_s" {
   description = "Static external IP of the VM"
   value       = google_compute_instance.centos9_vm3.network_interface[0].access_config[0].nat_ip
 }
