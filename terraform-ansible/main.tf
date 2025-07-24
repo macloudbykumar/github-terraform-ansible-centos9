@@ -50,9 +50,6 @@ resource "google_compute_instance" "centos9_vm" {
   tags = ["centos9"]
 }
 
-output "instance_ip" {
-  value = google_compute_instance.centos9_vm.network_interface[0].access_config[0].nat_ip
-}
 */
 
 resource "google_compute_instance" "centos9_vm" {
@@ -85,4 +82,8 @@ resource "google_compute_instance" "centos9_vm" {
   }
 
   tags = ["centos9"]
+}
+
+output "instance_ip" {
+  value = google_compute_instance.centos9_vm.network_interface[0].access_config[0].nat_ip
 }
