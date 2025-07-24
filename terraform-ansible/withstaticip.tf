@@ -1,3 +1,5 @@
+#These lines got commented as availabel in main.tf file
+/* 
 terraform {
   required_version = ">= 1.3"
   
@@ -41,15 +43,18 @@ resource "google_compute_firewall" "allow_ssh" {
   priority      = 1000
   description   = "Allow SSH (and web) ingress"
 }
+*/
+#These lines got commented as availabel in main.tf file end
+
 
 resource "google_compute_address" "static_ip" {
-  name   = "centos9-vm2-ip"
+  name   = "centos9-vm3-ip"
   region = "us-central1"
 }
 
-resource "google_compute_instance" "centos9_vm" {
+resource "google_compute_instance" "centos9_vm3" {
   depends_on  = [google_compute_firewall.allow_ssh]
-  name        = "centos9-vm2"
+  name        = "centos9-vm3"
   machine_type = "e2-medium"
   zone        = "us-central1-a"
 
@@ -85,5 +90,5 @@ resource "google_compute_instance" "centos9_vm" {
 
 output "instance_ip" {
   description = "Static external IP of the VM"
-  value       = google_compute_instance.centos9_vm.network_interface[0].access_config[0].nat_ip
+  value       = google_compute_instance.centos9_vm3.network_interface[0].access_config[0].nat_ip
 }
