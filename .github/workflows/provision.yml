@@ -20,7 +20,11 @@ jobs:
         run: |
           chmod 600 ~/.ssh/id_rsa
           chmod 644 ~/.ssh/id_rsa.pub
-          export ANSIBLE_HOST_KEY_CHECKING=False
+
+      - name: Create ansible.cfg with host_key_checking disabled
+        run: |
+          echo '[defaults]' > ansible.cfg
+          echo 'host_key_checking = False' >> ansible.cfg
 
       - name: Install Terraform and Ansible on CentOS 9
         run: |
