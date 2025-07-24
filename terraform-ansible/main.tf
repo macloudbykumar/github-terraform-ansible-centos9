@@ -12,7 +12,7 @@ resource "google_compute_network" "vpc" {
 resource "google_compute_instance" "centos9_vm" {
   name         = "centos9-vm"
   machine_type = "e2-medium"
-
+  zone = "us-central1-a"
   boot_disk {
     initialize_params {
       image = "centos-cloud/centos-stream-9"
