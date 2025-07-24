@@ -1,4 +1,4 @@
-name: Deploy CentOS 9 on GCP and Configure via Ansible
+name: Destroy Deploy CentOS 9 on GCP and Configure via Ansible
 
 on:
   workflow_dispatch:
