@@ -16,16 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up SSH key
-        run: |
-          chmod 600 ~/.ssh/id_rsa
-          chmod 644 ~/.ssh/id_rsa.pub
-
-      - name: Create ansible.cfg with host_key_checking disabled
-        run: |
-          echo '[defaults]' > ansible.cfg
-          echo 'host_key_checking = False' >> ansible.cfg
-
       - name: Install Terraform and Ansible on CentOS 9
         run: |
           # Enable required repos
@@ -47,7 +37,7 @@ jobs:
           cd terraform-ansible
           terraform init
 
-      - name: Terraform Apply
+      - name: Terraform Destroy
         run: |
           cd terraform-ansible
           terraform destroy -auto-approve
