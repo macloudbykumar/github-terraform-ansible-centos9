@@ -85,7 +85,7 @@
           </head>
           <body>
               <div class="container">
-                  <h1>🚀 AWS Terraform Webinar – Hosted by Eduarn</h1>
+                  <h1>🚀 AWS Terraform Webinar – Hosted by Eduarn but Im Running in GCP Cloud!</h1>
                   <p>Thank you for launching this instance. Join our 90-minute live demo session to learn how to build real cloud infrastructure using Terraform on AWS.</p>
                   <img src="https://eduarn.com/static/images/eduarn-lms/eduarn-lms-learning-management-system-main.webp" alt="Eduarn LMS">
                   <br>
