@@ -1,8 +1,10 @@
+#on:
+#  push:
+#    branches:
+#      - main  # Or whichever branch you want
 on:
-  push:
-    branches:
-      - main  # Or whichever branch you want
-
+  workflow_dispatch:    
+  
 jobs:
   hello:
     name: Say Hello
