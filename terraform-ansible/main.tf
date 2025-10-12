@@ -15,8 +15,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket      = "tf-state-prod-bykumar"
-    prefix      = "ansibleterraform"
+    bucket      = "galvanic-flame-466111-q8-tf-bucket"
     credentials = "~/sec.json"
    }
 }
