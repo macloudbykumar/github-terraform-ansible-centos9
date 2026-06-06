@@ -237,6 +237,14 @@ EduArn provides instructor-led online and corporate training programs covering:
 * Hands-On Labs
 * Certification Preparation
 
+## 🎓 EduArn Video Learning
+
+Learn Terraform, Ansible, AWS, Azure, GCP, Kubernetes, DevOps, and Platform Engineering through hands-on projects and instructor-led training.
+
+🎥 Featured Tutorial:
+
+[![Terraform Ansible CentOS 9 Tutorial](https://img.youtube.com/vi/G9Ix8bOV-Qo/maxresdefault.jpg)](https://youtu.be/G9Ix8bOV-Qo)
+
 ### Useful Links
 
 Website: [https://eduarn.com](https://eduarn.com)
